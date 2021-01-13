@@ -14,10 +14,10 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
   && rm -rf /var/lib/apt/lists/* /var/cache/apt/*
 
 # 2. Install Chrome driver used by Selenium
-RUN  rm -r /tmp/chromedriver
+
 RUN   LATEST=$(wget -q -O - http://chromedriver.storage.googleapis.com/LATEST_RELEASE)
 RUN   wget https://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip -O /tmp/chromedriver_linux64.zip
-RUN   mkdir /tmp/chromedriver
+RUN   rm /tmp/chromedriver/* || mkdir /tmp/chromedriver
 RUN   unzip /tmp/chromedriver_linux64.zip -d /tmp/chromedriver/
 RUN   sudo add-apt-repository ppa:canonical-chromium-builds/stage
 RUN   /usr/bin/yes | sudo apt update
